@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { useEffect } from 'react';
 import {
@@ -68,7 +68,7 @@ const Homepage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-white text-black overflow-x-hidden">
-      
+
       {/* Hero Section */}
       <motion.div
         ref={ref}
@@ -77,7 +77,7 @@ const Homepage = () => {
         initial="hidden"
         animate={controls}
       >
-        {/* Text */}
+        {/* Text Content */}
         <motion.div
           className="text-center lg:text-left max-w-xl"
           variants={fadeSlideLeft}
@@ -100,7 +100,7 @@ const Homepage = () => {
           </div>
         </motion.div>
 
-        {/* Image */}
+        {/* Hero Image */}
         <motion.img
           src="/landingPageImage.png"
           alt="Raghubabu Developer"
@@ -130,7 +130,7 @@ const Homepage = () => {
         ))}
       </motion.div>
 
-      {/* Highlight Section */}
+      {/* Highlight Text */}
       <motion.div
         className="text-center mb-24"
         initial={{ opacity: 0, scale: 0.9 }}
@@ -138,9 +138,8 @@ const Homepage = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
-   
         <p className="text-3xl font-semibold mt-3">Pre-Built Creative</p>
-        <p className="text-xl text-gray-600">Personal  Demos</p>
+        <p className="text-xl text-gray-600">Personal Demos</p>
       </motion.div>
     </div>
   );

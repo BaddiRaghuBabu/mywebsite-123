@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -10,11 +10,11 @@ import { HiMenu, HiX } from 'react-icons/hi';
 
 const navLinks = ['Home', 'About', 'Portfolio', 'Contact'];
 
-// Replace these URLs with your actual social profile URLs
 const socialLinks = {
   github: 'https://github.com/BaddiRaghuBabu',
   instagram: 'https://instagram.com/baddiraghubabu',
   facebook: 'https://facebook.com/baddiraghubabu',
+  pinterest: 'https://pinterest.com',
   linkedin: 'https://www.linkedin.com/in/baddi-raghubabu',
 };
 
@@ -24,15 +24,19 @@ const Navbar = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const toggleMenu = () => setIsOpen(prev => !prev);
+  const handleLinkClick = () => setIsOpen(false);
 
-  const controlNavbar = () => {
-    if (window.scrollY > lastScrollY) {
-      setShowNavbar(false);
-    } else {
-      setShowNavbar(true);
+  // 👇 useCallback to satisfy useEffect dependency
+  const controlNavbar = useCallback(() => {
+    if (typeof window !== 'undefined') {
+      if (window.scrollY > lastScrollY) {
+        setShowNavbar(false);
+      } else {
+        setShowNavbar(true);
+      }
+      setLastScrollY(window.scrollY);
     }
-    setLastScrollY(window.scrollY);
-  };
+  }, [lastScrollY]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -43,16 +47,12 @@ const Navbar = () => {
         document.body.style.overflow = 'auto';
       };
     }
-  }, [isOpen, lastScrollY]);
+  }, [isOpen, controlNavbar]);
 
-  const handleLinkClick = () => setIsOpen(false);
-
-  // Hover animation for desktop nav links and social icons
   const hoverEffect = {
     whileHover: { scale: 1.1, color: '#111', transition: { duration: 0.3 } },
   };
 
-  // Mobile menu variants with staggered children animation
   const mobileMenuVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -115,47 +115,22 @@ const Navbar = () => {
 
         {/* Desktop Social Icons */}
         <div className="hidden md:flex gap-6 text-lg text-gray-600">
-          <motion.a
-            href={socialLinks.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            {...hoverEffect}
-            className="cursor-pointer"
-          >
-            <FaGithub />
-          </motion.a>
-          <motion.a
-            href={socialLinks.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-            {...hoverEffect}
-            className="cursor-pointer"
-          >
-            <FaInstagram />
-          </motion.a>
-          <motion.a
-            href={socialLinks.facebook}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Facebook"
-            {...hoverEffect}
-            className="cursor-pointer"
-          >
-            <FaFacebook />
-          </motion.a>
-
-          <motion.a
-            href={socialLinks.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            {...hoverEffect}
-            className="cursor-pointer"
-          >
-            <FaLinkedin />
-          </motion.a>
+          {Object.entries(socialLinks).map(([name, url]) => (
+            <motion.a
+              key={name}
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={name}
+              {...hoverEffect}
+              className="cursor-pointer"
+            >
+              {name === 'github' && <FaGithub />}
+              {name === 'instagram' && <FaInstagram />}
+              {name === 'facebook' && <FaFacebook />}
+              {name === 'linkedin' && <FaLinkedin />}
+            </motion.a>
+          ))}
         </div>
 
         {/* Mobile Toggle Button */}

@@ -42,7 +42,6 @@ const AboutPage = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Rotate the whole container by scroll amount mod 360 degrees
       const rotate = window.scrollY % 360;
       controls.start({ rotate });
     };
@@ -63,8 +62,8 @@ const AboutPage = () => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
-      animate={controls}
       className="min-h-screen bg-gradient-to-r from-pink-100 via-white to-white px-4 py-12 sm:px-6 md:px-10 lg:px-20"
     >
       {/* Header Section */}
@@ -75,7 +74,7 @@ const AboutPage = () => {
         transition={{ delay: 0.2, duration: 1 }}
       >
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-800 mb-2">
-          Hi, I'm Raghubabu
+          Hi, I&apos;m Raghubabu
         </h1>
         <p className="text-lg sm:text-xl text-gray-600">Frontend Developer (Fresher)</p>
       </motion.section>
@@ -90,8 +89,6 @@ const AboutPage = () => {
             <div
               key={idx}
               className="flex flex-col items-center justify-center bg-white shadow rounded-xl py-4"
-              role="img"
-              aria-label={skill.title}
             >
               <div className={`text-3xl mb-1 ${skill.color}`}>{skill.icon}</div>
               <p className="text-sm text-gray-700 font-medium">{skill.title}</p>
@@ -112,7 +109,6 @@ const AboutPage = () => {
               ease: 'linear',
             },
           }}
-          aria-label="Scrolling skills icons"
         >
           {[...skills, ...skills].map((skill, idx) => (
             <div
@@ -120,8 +116,6 @@ const AboutPage = () => {
               className={`inline-block p-6 rounded-full cursor-default select-none ${skill.color}`}
               style={{ minWidth: '120px' }}
               title={skill.title}
-              role="img"
-              aria-label={skill.title}
             >
               {skill.icon}
             </div>
@@ -144,7 +138,6 @@ const AboutPage = () => {
               key={index}
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               className="relative mb-10 md:mb-16 flex flex-col md:flex-row items-center"
             >
@@ -154,18 +147,13 @@ const AboutPage = () => {
               {/* Timeline Card */}
               <div
                 className={`w-full md:w-1/2 ${
-                  index % 2 === 0 ? 'md:ml-auto md:text-left md:pl-8' : 'md:mr-auto md:text-right md:pr-8'
+                  index % 2 === 0
+                    ? 'md:ml-auto md:text-left md:pl-8'
+                    : 'md:mr-auto md:text-right md:pr-8'
                 }`}
-                role="region"
-                aria-labelledby={`exp-title-${index}`}
               >
                 <div className="bg-white/70 backdrop-blur-md shadow-xl border border-gray-200 p-4 sm:p-6 rounded-xl sm:rounded-2xl">
-                  <h3
-                    id={`exp-title-${index}`}
-                    className="text-lg sm:text-xl font-bold text-gray-800"
-                  >
-                    {exp.title}
-                  </h3>
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-800">{exp.title}</h3>
                   {exp.company && (
                     <p className="text-sm text-gray-600 italic">{exp.company}</p>
                   )}
