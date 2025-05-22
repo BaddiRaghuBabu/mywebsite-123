@@ -23,7 +23,7 @@ const ContactPage = () => {
     e.preventDefault();
     setSuccessMsg('');
     setErrorMsg('');
-    setLoading(true); // Start loading
+    setLoading(true);
 
     emailjs
       .sendForm(
@@ -34,19 +34,19 @@ const ContactPage = () => {
       )
       .then(
         (result) => {
-          console.log("Email sent successfully:", result.text);
+          console.log('Email sent successfully:', result.text);
           setSuccessMsg('Message sent successfully!');
           form.current.reset();
-          setLoading(false); // Stop loading
+          setLoading(false);
 
           setTimeout(() => {
             setSuccessMsg('');
           }, 5000);
         },
         (error) => {
-          console.error("EmailJS Error:", error);
+          console.error('EmailJS Error:', error);
           setErrorMsg('Failed to send message. Please try again.');
-          setLoading(false); // Stop loading
+          setLoading(false);
 
           setTimeout(() => {
             setErrorMsg('');
@@ -100,7 +100,7 @@ const ContactPage = () => {
                   required
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"
                   placeholder="Write your message here..."
-                ></textarea>
+                />
               </div>
 
               {/* Success and Error Messages */}
@@ -171,7 +171,6 @@ const ContactPage = () => {
           </div>
         </div>
       </div>
-      
     </section>
   );
 };
