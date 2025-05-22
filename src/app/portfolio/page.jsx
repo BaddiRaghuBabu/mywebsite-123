@@ -36,10 +36,10 @@ const features = [
 
 const PortfolioPage = () => {
   return (
-    <section className="min-h-screen bg-gradient-to-r from-rose-100 via-white to-fuchsia-100 px-4 py-20 relative overflow-hidden">
-      <div className="max-w-6xl mx-auto text-center">
+    <section className="min-h-screen bg-gradient-to-r from-rose-100 via-white to-fuchsia-100 px-4 md:px-12 lg:px-24 py-16 md:py-24 lg:py-32 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto text-center">
         {/* Title + Animation */}
-        <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-snug text-gray-900">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-snug text-gray-900">
           Biggest Personal Portfolio <br />
           <TypeAnimation
             sequence={[
@@ -59,60 +59,49 @@ const PortfolioPage = () => {
           />
         </h2>
 
-        <p className="text-gray-700 text-lg md:text-xl mb-8">
+        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 mb-10">
           Our template is fully responsive and perfect for all devices. <br />
           Discover the best portfolio to showcase your work and skills.
         </p>
 
         {/* Down Arrow */}
-        <div className="flex justify-center mb-14">
+        <div className="flex justify-center mb-10 md:mb-16">
           <div className="animate-bounce">
             <FaArrowDown className="text-pink-500 text-3xl" />
           </div>
         </div>
 
-       {/* Embedded Videos */}
-<div className="mb-16">
-  <h3 className="text-2xl font-bold text-gray-800 mb-8">Watch Our Demos</h3>
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    {/* Video 1 */}
-    <div className="relative w-full h-64 rounded-2xl overflow-hidden shadow-xl border border-gray-300 group">
-      <iframe
-        className="w-full h-full group-hover:scale-105 transition-transform duration-500"
-        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-        title="Demo 1"
-        frameBorder="0"
-        allowFullScreen
-      ></iframe>
-    </div>
+        {/* Embedded Videos */}
+        <div className="mb-16 px-2">
+          <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-8">
+            Watch Our Demos
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3].map((_, i) => (
+              <div
+                key={i}
+                className="relative w-full h-64 rounded-2xl overflow-hidden shadow-xl border border-gray-300 group"
+              >
+                <iframe
+                  className="w-full h-full group-hover:scale-105 transition-transform duration-500"
+                  src={
+                    i === 0
+                      ? "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                      : i === 1
+                      ? "https://www.youtube.com/embed/oHg5SJYRHA0"
+                      : "https://www.youtube.com/embed/9bZkp7q19f0"
+                  }
+                  title={`Demo ${i + 1}`}
+                  frameBorder="0"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            ))}
+          </div>
+        </div>
 
-    {/* Video 2 */}
-    <div className="relative w-full h-64 rounded-2xl overflow-hidden shadow-xl border border-gray-300 group">
-      <iframe
-        className="w-full h-full group-hover:scale-105 transition-transform duration-500"
-        src="https://www.youtube.com/embed/oHg5SJYRHA0"
-        title="Demo 2"
-        frameBorder="0"
-        allowFullScreen
-      ></iframe>
-    </div>
-
-    {/* Video 3 */}
-    <div className="relative w-full h-64 rounded-2xl overflow-hidden shadow-xl border border-gray-300 group">
-      <iframe
-        className="w-full h-full group-hover:scale-105 transition-transform duration-500"
-        src="https://www.youtube.com/embed/9bZkp7q19f0"
-        title="Demo 3"
-        frameBorder="0"
-        allowFullScreen
-      ></iframe>
-    </div>
-  </div>
-</div>
-
-
-        {/* Features Grid with Animation */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20 px-2">
           {features.map((feat, index) => (
             <motion.div
               key={index}
@@ -122,9 +111,11 @@ const PortfolioPage = () => {
               viewport={{ once: true }}
               className="bg-gray-900 text-white border border-gray-800 rounded-xl p-6 cursor-pointer shadow-md hover:bg-gray-500 hover:text-black transition duration-300"
             >
-              <div className="text-4xl mb-4">{feat.icon}</div>
-              <h3 className="text-xl font-semibold mb-2">{feat.title}</h3>
-              <p className="text-gray-300">{feat.desc}</p>
+              <div className="text-3xl md:text-4xl mb-4">{feat.icon}</div>
+              <h3 className="text-lg md:text-xl font-semibold mb-2">
+                {feat.title}
+              </h3>
+              <p className="text-gray-300 text-sm md:text-base">{feat.desc}</p>
             </motion.div>
           ))}
         </div>

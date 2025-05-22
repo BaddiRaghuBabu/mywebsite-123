@@ -171,6 +171,7 @@ const ContactPage = () => {
           </div>
         </div>
       </div>
+      
     </section>
   );
 };
